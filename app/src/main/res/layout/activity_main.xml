@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="nyc.c4q.shannonalexander_navarro.simon.MainActivity">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Score: " />
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_button"
+        android:onClick="buttonClicked"
+        android:layout_centerInParent="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_red"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_weight="1"
+                android:background="@color/red"
+                android:onClick="buttonClicked"/>
+
+            <Button
+                android:id="@+id/button_yellow"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_weight="1"
+                android:background="@color/yellow"
+                android:onClick="buttonClicked"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/button_green"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_weight="1"
+                android:background="@color/green"
+                android:onClick="buttonClicked"/>
+
+            <Button
+                android:id="@+id/button_blue"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:onClick="buttonClicked"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
