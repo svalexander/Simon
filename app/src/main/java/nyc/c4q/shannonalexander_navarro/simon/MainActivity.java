@@ -1,6 +1,7 @@
 package nyc.c4q.shannonalexander_navarro.simon;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,7 @@ import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    Handler handler;
     private Button startButton;
     private Button redButton;
     private Button greenButton;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     boolean startClicked;
     ArrayList<View> colorsArray = new ArrayList<>();
     ArrayList<View> generatedGameArray = new ArrayList<>();
-   // ArrayList<View> userButtonsPicked = new ArrayList<>();
 
     //private Handler time;
     private int buttonIndex = 0;
@@ -47,41 +47,51 @@ public class MainActivity extends AppCompatActivity {
         redButton = (Button) findViewById(R.id.button_red);
         yellowButton = (Button) findViewById(R.id.button_yellow);
         scoreTextView = (TextView) findViewById(R.id.score_text_view);
-        //colorsArray = {//array of buttons, this is correct?
-        colorsArray.add(findViewById(R.id.button_blue));
-        colorsArray.add(findViewById(R.id.button_green));
-        colorsArray.add(findViewById(R.id.button_red));
-        colorsArray.add(findViewById(R.id.button_yellow));
-
-
-      //  initializeViews(); //find view by id methods
-
-
+        colorsArray.add(blueButton);
+        colorsArray.add(greenButton);
+        colorsArray.add(redButton);
+        colorsArray.add(yellowButton);
     }
 
 
     public void randomButton() { //picks one random color, then adds to another arrayList
 
         random = new Random();
-        int indexValue = random.nextInt(3)+1;
+        int indexValue = random.nextInt(3);
         generatedGameArray.add(colorsArray.get(indexValue));
-    }
-
-
-    public void playGame(){
-   // gameRunning = true;
-        while (gameRunning){
-            for (int i = 0; i < generatedGameArray.size(); i++) {
-                buttonClicked(generatedGameArray.get(i));
-            }
+        for (int i = 0; i < generatedGameArray.size(); i++) {
+            flashColor(colorsArray.get(indexValue), i);
         }
-//        gameRunning = false;
-
     }
 
-    public void checkButtons(View v){
-        if (generatedGameArray.get(round).getId() == v.getId()){
-            Log.i("ARRAY SIZE", generatedGameArray.size()+"");
+    public void flashColor(View v, int index) {
+
+        switch (v.getId()) {
+
+            case R.id.button_blue:
+
+                v.setBackgroundColor(0xFF00FFFF);//change color
+
+                break;
+            case R.id.button_green:
+
+                v.setBackgroundColor(0xFF00FF00);//change color
+
+                break;
+            case R.id.button_red:
+                v.setBackgroundColor(0XFFFF00FF);//change color
+
+                break;
+            case R.id.button_yellow:
+                v.setBackgroundColor(0XFFFFFF00);//change color
+
+                break;
+        }
+    }
+
+    public void checkButtons(View v) {
+        if (generatedGameArray.get(round).getId() == v.getId()) {
+            Log.i("ARRAY SIZE", generatedGameArray.size() + "");
             Log.i("ARRAY ", generatedGameArray.toString());
 
             score++;
@@ -93,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             generatedGameArray.clear();
             round = 0;
             Toast.makeText(MainActivity.this, "You lose, start again.", Toast.LENGTH_SHORT).show();
-            Log.i("ARRAY SIZE", generatedGameArray.size()+"");
+            Log.i("ARRAY SIZE", generatedGameArray.size() + "");
             startButton.setVisibility(View.VISIBLE);
             startClicked = false;
             score = 0;
@@ -101,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             onRestart();
         }
     }
+
     public void buttonClicked(View v) { //check what button was clicked
         switch (v.getId()) {
             case R.id.start_button:
@@ -110,30 +121,27 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Watch for the buttons to light up and then press them in that order.", Toast.LENGTH_SHORT).show();
                 randomButton();
                 gameRunning = true;
-            //  playGame();
                 break;
             case R.id.button_blue:
-                if(startClicked){
+                if (startClicked) {
                     checkButtons(v);
                     break;
                 }
-                //change color of button
-                //if button picked is correct generate a new color here?
                 break;
             case R.id.button_green:
-                if(startClicked){
+                if (startClicked) {
                     checkButtons(v);
                     break;
                 }
                 break;
             case R.id.button_red:
-                if(startClicked){
+                if (startClicked) {
                     checkButtons(v);
                     break;
                 }
                 break;
             case R.id.button_yellow:
-                if(startClicked){
+                if (startClicked) {
                     checkButtons(v);
                     break;
                 }
@@ -141,16 +149,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
-//    //need to click start button , need on click listener to do this
-//    public void initializeViews() { // might not need this
-//        startButton = (Button) findViewById(R.id.start_button);
-//        redButton = (Button) findViewById(R.id.button_red);
-//        greenButton = (Button) findViewById(R.id.button_green);
-//        blueButton = (Button) findViewById(R.id.button_blue);
-//        yellowButton = (Button) findViewById(R.id.button_yellow);
-//    }
 
 
 }
