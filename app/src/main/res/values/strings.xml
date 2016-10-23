@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Simon</string>
     <string name="start_button">Start</string>
+    <string name="score_button">Score:</string>
 </resources>
